@@ -7,12 +7,12 @@ Este é um projeto de API REST desenvolvido em Node.js, utilizando o Express e M
 Certifique-se de ter os seguintes softwares instalados em sua máquina:
 
 - Node.js
-- Yarn ou NPM
-- Docker (opcional, para executar o banco de dados MongoDB em um contêiner Docker)
+- Yarn
+- Docker (para executar o banco de dados MongoDB em um contêiner Docker)
 
 ## Configuração do Banco de Dados (MongoDB)
 
-Se você optou por usar o banco de dados MongoDB em um contêiner Docker, siga os passos abaixo:
+Para usar o banco de dados MongoDB em um contêiner Docker, siga os passos abaixo:
 
 1. Execute o seguinte comando para iniciar um contêiner Docker com o MongoDB:
 
@@ -31,6 +31,24 @@ docker ps
 ```bash
 docker start mongo-logs
 ```
+
+## Configuração do RabbitMQ
+
+Faça as configurações abaixo para executar o Rabbit que também é utilizado através do Docker
+
+1. Execute o seguinte comando para baixar uma imagem do RabbitMQ:
+
+```bash
+docker pull rabbitmq
+```
+
+2. Agora vá em images no Docker e clique em iniciar no rabbitmq:
+
+![Alt text](/img/image.png)
+
+3. Agora insira essas informações e clique em RUN:
+
+![Alt text](/img/image-1.png)
 
 ## Instalação das Dependências
 
@@ -52,17 +70,6 @@ cd nome-do-repositorio
 yarn install
 ```
 
-## Variáveis de Ambiente
-
-O projeto utiliza variáveis de ambiente para configurar algumas opções importantes, como a porta em que o servidor será executado e o banco de dados a ser utilizado.
-
-Crie um arquivo .env na raiz do projeto e defina as seguintes variáveis:
-
-```bash
-PORT=3000 // Porta em que o servidor será executado
-DATABASE= "mongodb"
-```
-
 ## Executando o Projeto
 
 Com as dependências instaladas e o arquivo .env configurado, você pode iniciar o servidor da API com o seguinte comando:
@@ -71,8 +78,6 @@ Com as dependências instaladas e o arquivo .env configurado, você pode iniciar
 yarn dev
 ```
 
-O servidor será executado na porta especificada no arquivo .env e estará pronto para receber requisições.
-
 ## Endpoints da API
 
 - **GET /api/listCars**: Retorna os dados da API externa no endpoint **GET /api/cars**.
@@ -80,3 +85,27 @@ O servidor será executado na porta especificada no arquivo .env e estará pront
 - **POST /api/createCar**: Cria um novo registro na API externa no endpoint **POST /api/cars**. O corpo da requisição deve conter os dados do carro a ser criado.
 
 - **GET /api/logs**: Consulta todos os registros salvos na tabela de logs do banco de dados.
+
+## Configurando o consumer do RabbitMQ
+
+O consumer fica em outro repositório e precisa seguir os passos a seguir:
+
+1. Clone o repositório utilizando o comando:
+
+```bash
+git clone https://github.com/rafahcerqueira/rabbit-receiver.git
+```
+
+2. Instale as depêndencias:
+
+```bash
+yarn install
+```
+
+3. Execute o projeto utilizando o comando:
+
+```bash
+yarn dev
+```
+
+**OBS.: Certifique-se que os containers do RabbitMQ e do MongoDB estão rodando!**

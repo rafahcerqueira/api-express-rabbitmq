@@ -10,10 +10,8 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.error("Error connecting to MongoDB:", error));
 
-// Middlewares
 app.use(express.json());
 
-// Rotas personalizadas importadas de routes.ts
 app.use(routes);
 
 app.listen(3333, () => console.log("Server running on port 3333"));

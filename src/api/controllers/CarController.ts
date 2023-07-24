@@ -23,11 +23,10 @@ export const createCarController = async (
   response: Response
 ) => {
   try {
-    const carData: Car = request.body;
+    const carData: any = request.body;
     await carService.createCar(carData);
 
-    // Postando informações do carro criado para uma fila no rabbitmq
-
+    // Postando informações na fila
     const queue = "car_created";
     const text = {
       item: carData,
