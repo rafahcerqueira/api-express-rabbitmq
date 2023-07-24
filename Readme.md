@@ -10,6 +10,26 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
 - Yarn
 - Docker (para executar o banco de dados MongoDB em um contêiner Docker)
 
+## Instalação das Dependências
+
+1. Clone este repositório em sua máquina local:
+
+```bash
+git clone https://github.com/rafahcerqueira/api-express-rabbitmq
+```
+
+2. Acesse a pasta do projeto:
+
+```bash
+cd api-express-rabbitmq
+```
+
+3. Instale as dependências do projeto usando o Yarn:
+
+```bash
+yarn install
+```
+
 ## Configuração do Banco de Dados (MongoDB)
 
 Para usar o banco de dados MongoDB em um contêiner Docker, siga os passos abaixo:
@@ -50,26 +70,6 @@ docker pull rabbitmq
 
 ![Alt text](/img/image-1.png)
 
-## Instalação das Dependências
-
-1. Clone este repositório em sua máquina local:
-
-```bash
-git clone https://github.com/rafahcerqueira/api-express-rabbitmq
-```
-
-2. Acesse a pasta do projeto:
-
-```bash
-cd api-express-rabbitmq
-```
-
-3. Instale as dependências do projeto usando o Yarn:
-
-```bash
-yarn install
-```
-
 ## Executando o Projeto
 
 Com as dependências instaladas e o arquivo .env configurado, você pode iniciar o servidor da API com o seguinte comando:
@@ -82,7 +82,7 @@ yarn dev
 
 - **GET /api/listCars**: Retorna os dados da API externa no endpoint **GET /api/cars**.
 
-- **POST /api/createCar**: Cria um novo registro na API externa no endpoint **POST /api/cars**. O corpo da requisição deve conter os dados do carro a ser criado.
+- **POST /api/createCar**: Cria um novo registro de log com as informações de criação do carro e envia para a fila consumir e depois fazer uma requisição na API externa no endpoint **POST /api/cars**. O corpo da requisição deve conter os dados do carro a ser criado.
 
 - **GET /api/logs**: Consulta todos os registros salvos na tabela de logs do banco de dados.
 
