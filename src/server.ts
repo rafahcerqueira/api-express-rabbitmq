@@ -1,6 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
+import { connect } from "./rabbit";
 import routes from "./api/routes/routes";
+import "./listener";
 
 const app = express();
 
@@ -9,6 +11,9 @@ mongoose
   .connect("mongodb://localhost/carlogs")
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.error("Error connecting to MongoDB:", error));
+
+// Conexão com o RabbitMQ
+connect();
 
 app.use(express.json());
 

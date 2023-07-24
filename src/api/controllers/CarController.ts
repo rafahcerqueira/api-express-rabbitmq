@@ -3,6 +3,7 @@ import { Car } from "../models/Car";
 import { Request, Response } from "express";
 import { CarService } from "../services/CarService";
 import { MongoDBRepository } from "../../repositories/MongoDBRepository";
+import { channel, queue } from "../../rabbit";
 
 const carService = new CarService(new MongoDBRepository());
 
@@ -24,31 +25,9 @@ export const createCarController = async (
 ) => {
   try {
     const carData: any = request.body;
-    await carService.createCar(carData);
 
     // Postando informações na fila
-    const queue = "car_created";
-    const text = {
-      item: carData,
-      text: "Car created",
-    };
-
-    (async () => {
-      let connection;
-      try {
-        connection = await amqp.connect("amqp://localhost");
-        const channel = await connection.createChannel();
-
-        await channel.assertQueue(queue, { durable: false });
-        channel.sendToQueue(queue, Buffer.from(JSON.stringify(text)));
-        console.log(" [x] Sent '%s'", text);
-        await channel.close();
-      } catch (err) {
-        console.warn(err);
-      } finally {
-        if (connection) await connection.close();
-      }
-    })();
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(carData)));
 
     response.json({ message: "Car created successfully!" });
   } catch (error) {

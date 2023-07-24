@@ -86,26 +86,4 @@ yarn dev
 
 - **GET /api/logs**: Consulta todos os registros salvos na tabela de logs do banco de dados.
 
-## Configurando o consumer do RabbitMQ
-
-O consumer fica em outro repositório e precisa seguir os passos a seguir:
-
-1. Clone o repositório utilizando o comando:
-
-```bash
-git clone https://github.com/rafahcerqueira/rabbit-receiver.git
-```
-
-2. Instale as depêndencias:
-
-```bash
-yarn install
-```
-
-3. Execute o projeto utilizando o comando:
-
-```bash
-yarn dev
-```
-
 **OBS.: Certifique-se que os containers do RabbitMQ e do MongoDB estão rodando!**

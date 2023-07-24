@@ -32,7 +32,7 @@ export class CarService {
       const logDocument = new LogModel(logData);
       await logDocument.save();
     } else {
-      console.error("ID do carro não encontrado ou vazio:", response.data);
+      console.error("Error creating car.");
     }
   }
 }
