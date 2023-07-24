@@ -20,13 +20,13 @@ const carService = new CarService(new MongoDBRepository());
       async (message) => {
         if (message) {
           const data = JSON.parse(message.content.toString());
-          console.log(" [x] Received '%s'", data);
+          console.log("Message received", data);
 
           try {
             await carService.createCar(data);
-            console.log(" Webhook enviado.");
+            console.log("Webhook sent");
           } catch (error) {
-            console.error(" Erro ao enviar webhook:", error);
+            console.error("Error send webhook", error);
           }
         }
       },

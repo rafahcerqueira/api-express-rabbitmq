@@ -55,13 +55,13 @@ docker pull rabbitmq
 1. Clone este repositório em sua máquina local:
 
 ```bash
-git clone https://github.com/rafahcerqueira/nome-do-repositorio.git
+git clone https://github.com/rafahcerqueira/api-express-rabbitmq
 ```
 
 2. Acesse a pasta do projeto:
 
 ```bash
-cd nome-do-repositorio
+cd api-express-rabbitmq
 ```
 
 3. Instale as dependências do projeto usando o Yarn:

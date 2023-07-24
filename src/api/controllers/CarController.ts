@@ -1,9 +1,8 @@
-import amqp from "amqplib";
 import { Car } from "../models/Car";
 import { Request, Response } from "express";
+import { channel, queue } from "../../rabbit";
 import { CarService } from "../services/CarService";
 import { MongoDBRepository } from "../../repositories/MongoDBRepository";
-import { channel, queue } from "../../rabbit";
 
 const carService = new CarService(new MongoDBRepository());
 
@@ -24,7 +23,7 @@ export const createCarController = async (
   response: Response
 ) => {
   try {
-    const carData: any = request.body;
+    const carData: Car = request.body;
 
     // Postando informações na fila
     channel.sendToQueue(queue, Buffer.from(JSON.stringify(carData)));
